@@ -1,0 +1,55 @@
+version: "3"
+services:
+  service_a:
+    build:
+      dockerfile: service_a/Dockerfile
+      context: .
+    volumes:
+      - ./service_a:/myapp
+    ports:
+      - "8080:3000"
+  service_a_db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: service_a
+    volumes:
+      - ./service_a/tmp/mysqldb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  service_a_redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./service_a/tmp/redisdb:/data
+  service_b:
+    build:
+      dockerfile: service_b/Dockerfile
+      context: .
+    volumes:
+      - ./service_b:/myapp
+    ports:
+      - "8081:3000"
+  service_b_mongodb:
+    image: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+  service_c:
+    build:
+      dockerfile: service_c/Dockerfile
+      context: .
+    volumes:
+      - ./service_c:/myapp
+    ports:
+      - "8082:3000"
+  service_c_db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: service_c
+    volumes:
+      - ./service_c/tmp/mysqldb:/var/lib/mysql
+    ports:
+      - "3308:3306"
