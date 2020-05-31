@@ -9,11 +9,14 @@
     "nodemon": "2.0.3"
   },
   "dependencies": {
+    "axios": "^0.19.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "redis": "^3.0.2"
   }
 }

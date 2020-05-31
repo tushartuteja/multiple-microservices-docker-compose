@@ -8,10 +8,18 @@ services:
       - ./service_a:/myapp
     ports:
       - "8080:3000"
+    depends_on:
+      - service_a_db
+      - service_a_redis
+      - service_b
+      - service_c
   service_a_db:
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: service_a
+      MYSQL_DATABASE: "db"
+      MYSQL_USER: "user"
+      MYSQL_PASSWORD: "pass"
     volumes:
       - ./service_a/tmp/mysqldb:/var/lib/mysql
     ports:
@@ -30,6 +38,8 @@ services:
       - ./service_b:/myapp
     ports:
       - "8081:3000"
+    depends_on:
+      - service_b_mongodb
   service_b_mongodb:
     image: mongo
     environment:
@@ -45,6 +55,8 @@ services:
       - ./service_c:/myapp
     ports:
       - "8082:3000"
+    depends_on:
+      - service_c_db
   service_c_db:
     image: mysql
     environment:
