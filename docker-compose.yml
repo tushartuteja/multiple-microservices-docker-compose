@@ -14,7 +14,7 @@ services:
       - service_b
       - service_c
   service_a_db:
-    image: mysql
+    image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: service_a
       MYSQL_DATABASE: "db"
